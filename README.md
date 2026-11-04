@@ -89,6 +89,20 @@ Quasar Bridge учит Яндекс Станцию отвечать с помо�
 curl -fL -o /tmp/install-quasar-bridge.sh https://github.com/Krelion/quasar-bridge/releases/latest/download/install.sh && sh /tmp/install-quasar-bridge.sh root@SPEAKER_IP -p 2222
 ```
 
+Для установки именно версии **v0.7.3** используйте установщик и архивы
+из одного релиза:
+
+```sh
+curl -fL -o /tmp/install-quasar-bridge.sh https://github.com/Krelion/quasar-bridge/releases/download/v0.7.3/install.sh && \
+QUASAR_RELEASE_URL=https://github.com/Krelion/quasar-bridge/releases/download/v0.7.3 \
+sh /tmp/install-quasar-bridge.sh root@SPEAKER_IP -p 2222
+```
+
+Релиз публикуется GitHub Actions после отправки тега `vMAJOR.MINOR.PATCH`.
+Перед установкой дождитесь успешной сборки и появления архивов ARM64/ARMv7,
+контрольных сумм и `install.sh` на странице
+[GitHub Releases](https://github.com/Krelion/quasar-bridge/releases).
+
 Если SSH на колонке слушает другой порт, замените `2222`.
 
 Установщик сам скачает последнюю версию, сверит контрольную сумму, передаст
