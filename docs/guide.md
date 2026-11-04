@@ -52,7 +52,7 @@ WebSocket-протокол Quasar/Uniproxy:
 ## 1. Получить и собрать проект
 
 ```sh
-git clone git@github.com:skrashevich/quasar-bridge.git
+git clone git@github.com:Krelion/quasar-bridge.git
 cd quasar-bridge
 go version
 go mod download
@@ -336,8 +336,12 @@ JSON-конфигурация должна существовать и прох�
 
 По [ограничениям режима подписки](https://developers.openai.com/siwc/token-sharing-open-source/preview-limitations)
 запросы используют `store=false`, `stream=true` и передают контекст в каждом
-запросе. Bridge принимает результат только после `response.completed`:
-обрыв потока или ошибка не приводят к выполнению частичных вызовов инструментов.
+запросе. Bridge принимает результат только после `response.completed`. Если
+финальный `output` пуст, используются завершённые элементы
+`response.output_item.done` в порядке `output_index`, включая текст, reasoning
+и вызовы инструментов. Непустой финальный `output` имеет приоритет и не
+дублируется. Обрыв потока или ошибка не приводят к выполнению частичных вызовов
+инструментов.
 История диалога, локальные инструменты и подключённые MCP работают через
 function tools. Для классификации и планирования JSON запрашивается промптом
 и проверяется мостом. `llm_chat_parameters` не поддерживается;
@@ -1244,7 +1248,7 @@ AirPlay, плеера и диалога обрабатываются отдел�
 
 Проверка возвращает текущую и последнюю стабильную версии, наличие обновления,
 ссылку на релиз и доступность автоустановки. Используется официальный репозиторий
-[skrashevich/quasar-bridge](https://github.com/skrashevich/quasar-bridge/releases).
+[Krelion/quasar-bridge](https://github.com/Krelion/quasar-bridge/releases).
 Если API GitHub недоступен, проверка использует перенаправление официальной
 ссылки на последний релиз. Общее ожидание проверки ограничено 8 секундами.
 Предварительные релизы и понижение версии исключены. Для сборки с неизвестной
