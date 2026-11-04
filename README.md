@@ -89,12 +89,12 @@ Quasar Bridge учит Яндекс Станцию отвечать с помо�
 curl -fL -o /tmp/install-quasar-bridge.sh https://github.com/Krelion/quasar-bridge/releases/latest/download/install.sh && sh /tmp/install-quasar-bridge.sh root@SPEAKER_IP -p 2222
 ```
 
-Для установки именно версии **v0.7.3** используйте установщик и архивы
+Для установки именно версии **v0.7.4** используйте установщик и архивы
 из одного релиза:
 
 ```sh
-curl -fL -o /tmp/install-quasar-bridge.sh https://github.com/Krelion/quasar-bridge/releases/download/v0.7.3/install.sh && \
-QUASAR_RELEASE_URL=https://github.com/Krelion/quasar-bridge/releases/download/v0.7.3 \
+curl -fL -o /tmp/install-quasar-bridge.sh https://github.com/Krelion/quasar-bridge/releases/download/v0.7.4/install.sh && \
+QUASAR_RELEASE_URL=https://github.com/Krelion/quasar-bridge/releases/download/v0.7.4 \
 sh /tmp/install-quasar-bridge.sh root@SPEAKER_IP -p 2222
 ```
 
