@@ -130,10 +130,23 @@ func testSlowLocalRequest(t *testing.T, finalStream uint32, omitID, voice, shoul
 		}
 	}
 	close(release)
+	refreshedListening := false
 	for {
 		f := next()
+		if full := f.Server.GetEvent().GetAliceResponse(); full != nil {
+			if !full.GetResponse().GetIsStreaming() || !full.GetVoiceResponse().GetShouldListen() || !shouldListen {
+				t.Fatal("invalid final listening envelope")
+			}
+			if full.GetHeader().GetResponseId() != initial.Server.GetEvent().GetAliceResponse().GetHeader().GetResponseId() {
+				t.Fatal("listening refresh changed streaming response identity")
+			}
+			refreshedListening = true
+		}
 		r := f.Server.GetEvent().GetDeferredAliceResponse()
 		if r != nil && r.GetIsLast() {
+			if refreshedListening != shouldListen {
+				t.Fatal("final reply did not refresh the full listening envelope")
+			}
 			if got := r.GetBaseResponse().GetShouldListen(); got != shouldListen {
 				t.Fatalf("final answer should_listen=%v, want %v", got, shouldListen)
 			}
